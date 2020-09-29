@@ -25,7 +25,7 @@ exports.createTeacher = async (req, res) => {
         })
         return
     }
-    else if (!req.body.teacher_key)
+    else if (!req.body.school_key)
     {
         res.status(400).send({
             message: "Error. School Key Empty"
@@ -45,7 +45,7 @@ exports.createTeacher = async (req, res) => {
     const teacher = {
         username : req.body.username,
         password : req.body.password,
-        teacher_key : req.body.teacher_key
+        school_key : req.body.school_key
     }
 
     Teacher.create(teacher)
@@ -67,7 +67,7 @@ exports.findAll = (req, res) => {
         if (data===null)
         {
             res.status(400).send({
-                message: "No students"
+                message: "No teachers"
             })
         }
         else
@@ -77,7 +77,7 @@ exports.findAll = (req, res) => {
     })
     .catch( err => {
         res.status(500).send({
-            message: "Error retrieving student. " + err.message
+            message: "Error retrieving teachers. " + err.message
         })
     })
 }
@@ -86,7 +86,7 @@ exports.authenticate = (req, res) => {
     const username = req.body.username
     const password = req.body.password
 
-    Student.findOne({where: {
+    Teacher.findOne({where: {
         username: username,
         password: password
     }})
@@ -109,7 +109,7 @@ exports.authenticate = (req, res) => {
     })
     .catch( err => {
         res.status(500).send({
-            message: "Error retrieving student" + err.message
+            message: "Error retrieving teacher" + err.message
         })
     })
 }

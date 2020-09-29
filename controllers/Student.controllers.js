@@ -10,7 +10,7 @@ function isUniqueUsername(username) {
 }
 
 function has_teacher(fk_teacher_key) {
-  return Teacher.count({ where: { teacher_key: fk_teacher_key } }).then(
+  return Teacher.count({ where: { id: fk_teacher_key } }).then(
     (count) => {
       if (count != 0) {
         return true;

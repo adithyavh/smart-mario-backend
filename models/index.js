@@ -26,7 +26,7 @@ db.Challenge = require("./Challenge.models.js")(sequelize, Sequelize);
 
 db.Student.belongsTo(db.Teacher, {
   foreignKey: "fk_teacher_key",
-  sourceKey: "teacher_key",
+  sourceKey: "id",
 });
 db.Student.belongsToMany(db.Challenge, { through: "Student_Challenge" });
 db.Challenge.belongsToMany(db.Student, { through: "Student_Challenge" });

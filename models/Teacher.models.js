@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    teacher_key: {
+    school_key: {
       type: Sequelize.STRING,
       allowNull: false,
     },
