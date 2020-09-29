@@ -7,22 +7,16 @@ exports.getRandomMCQTheory = async (req, res) => {
 };
 
 exports.getRandomMCQCode = async (req, res) => {
-  let index = Math.floor(Math.random() * numMCQCode) + 1;
   const jsonArray = await csv().fromFile("data/MCQ_Code.csv");
-  let jsonQn = jsonArray[index];
-  res.send({ message: "successful", Question: jsonQn });
+  res.send({ message: "successful", Question: jsonArray });
 };
 exports.getRandomShortTheory = async (req, res) => {
-  let index = Math.floor(Math.random() * numShortTheory) + 1;
   const jsonArray = await csv().fromFile("data/Short_Answer_Theory.csv");
-  let jsonQn = jsonArray[index];
-  res.send({ message: "successful", Question: jsonQn });
+  res.send({ message: "successful", Question: jsonArray });
 };
 exports.getRandomShortCode = async (req, res) => {
-  let index = Math.floor(Math.random() * numShortCode) + 1;
   const jsonArray = await csv().fromFile("data/Short_Answer_Code.csv");
-  let jsonQn = jsonArray[index];
-  res.send({ message: "successful", Question: jsonQn });
+  res.send({ message: "successful", Question: jsonArray });
 };
 
 // exports.getRandomMCQTheory(1,1)
