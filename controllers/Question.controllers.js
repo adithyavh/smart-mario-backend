@@ -1,16 +1,9 @@
 const csv = require("csvtojson");
 
-const numMCQTheory = 100;
-const numMCQCode = 100;
-const numShortTheory = 100;
-const numShortCode = 100;
-
 exports.getRandomMCQTheory = async (req, res) => {
-  let index = Math.floor(Math.random() * numMCQTheory) + 1;
+  // let index = Math.floor(Math.random() * numMCQTheory) + 1;
   const jsonArray = await csv().fromFile("data/MCQ_Theory.csv");
-  let jsonQn = jsonArray[index];
-  res.send({ message: "successful", Question: jsonQn });
-  // return({"message": "successful", "Index": index, "Question": jsonQn})
+  res.send({ message: "successful", allQuestions: jsonArray});
 };
 
 exports.getRandomMCQCode = async (req, res) => {
