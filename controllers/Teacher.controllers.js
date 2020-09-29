@@ -1,5 +1,4 @@
-const db = require("../models")
-const Teacher = db.Teacher
+const { Student, Teacher, Op } = require("../models");
 
 function isUniqueUsername (username) {
     return Teacher.count({ where: { username: username } })
