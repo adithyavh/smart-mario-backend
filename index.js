@@ -9,10 +9,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Set Header Content-Type = application/json (no quotes)
 
 const db = require("./models/index.js");
-
 db.sequelize.sync({ force: false }).then(() => {
   console.log("DB Synced");
 });
+
+const loader = require("./models/dataLoader.js");
+loader(db);
 
 // Test call
 
@@ -24,9 +26,9 @@ app.get("/", function (req, res) {
 require("./routes/Student.routes")(app);
 require("./routes/Teacher.routes")(app);
 require("./routes/Question.routes")(app);
+require("./routes/Result.routes")(app);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("Server running on port " + PORT);
 });
-

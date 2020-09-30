@@ -1,6 +1,7 @@
 module.exports = {
   dialect: "sqlite",
-  storage: "data/database.sqlite",
+  storage: "data/database.sqlite3",
+  logging: false,
   pool: {
     max: 5,
     min: 0,

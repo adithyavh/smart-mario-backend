@@ -10,14 +10,12 @@ function isUniqueUsername(username) {
 }
 
 function has_teacher(fk_teacher_key) {
-  return Teacher.count({ where: { id: fk_teacher_key } }).then(
-    (count) => {
-      if (count != 0) {
-        return true;
-      }
-      return false;
-    },
-  );
+  return Teacher.count({ where: { id: fk_teacher_key } }).then((count) => {
+    if (count != 0) {
+      return true;
+    }
+    return false;
+  });
 }
 
 exports.createStudent = async (req, res) => {
@@ -77,7 +75,7 @@ exports.createStudent = async (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  Student.findAll()
+  Student.findAll({ include: Teacher })
     .then((data) => {
       if (data === null) {
         res.status(400).send({
@@ -103,6 +101,7 @@ exports.authenticate = (req, res) => {
       username: username,
       password: password,
     },
+    include: Teacher,
   })
     .then((data) => {
       if (data === null) {

@@ -12,7 +12,7 @@ function isUniqueUsername(username) {
 function isValidSchoolKey(school_key) {
   let valid_school_ids = ["1", "2"];
   let valid = valid_school_ids.includes(school_key);
-  console.log(school_key, valid);
+  //   console.log(school_key, valid);
   return valid;
 }
 
