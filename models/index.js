@@ -23,7 +23,7 @@ db.Teacher = require("./Teacher.models.js")(sequelize, Sequelize);
 db.World = require("./World.models.js")(sequelize, Sequelize);
 db.Minigame = require("./Minigame.models.js")(sequelize, Sequelize);
 db.Challenge = require("./Challenge.models.js")(sequelize, Sequelize);
-db.Result = require("./Result.models")(sequelize, Sequelize, db);
+db.Result = require("./Result.models")(sequelize, Sequelize);
 
 // User.belongsTo(Company, {foreignKey: 'fk_companyname', targetKey: 'name'});
 // Adds fk_companyname to User
@@ -47,7 +47,11 @@ db.Challenge.belongsToMany(db.Student, {
   unique: false,
 });
 
-// db.Student.belongsToMany(db.Minigame, { through: db.Result, unique: false });
-// db.Minigame.belongsToMany(db.Student, { through: db.Result, unique: false });
+db.Student.belongsToMany(db.Minigame, {
+  through: db.Result,
+});
+db.Minigame.belongsToMany(db.Student, {
+  through: db.Result,
+});
 
 module.exports = db;
