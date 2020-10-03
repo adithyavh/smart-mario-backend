@@ -12,17 +12,26 @@ exports.addOrUpdate = (req, res) => {
     !req.body.questions_correct
   ) {
     res.status(400).send({ message: "Error. Incomplete Data" });
+    return;
   }
 
   const result = {
     studentId: req.body.studentId,
     minigameId: req.body.minigameId,
-    difficulty: req.body.difficulty,
+    difficulty: req.body.difficulty.toLowerCase(),
     level: req.body.level,
     score: req.body.score,
     questions_attempted: req.body.questions_attempted,
     questions_correct: req.body.questions_correct,
   };
+
+  let valid_diff = ["easy", "medium", "hard"];
+  if (!valid_diff.includes(result.difficulty)) {
+    res
+      .status(400)
+      .send({ message: "Error. Difficulty must be easy, medium or hard" });
+    return;
+  }
 
   Result.upsert(result)
     .then((data) => {
