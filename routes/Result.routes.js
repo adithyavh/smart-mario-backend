@@ -3,6 +3,7 @@ module.exports = (app) => {
 
   var router = require("express").Router();
 
+  router.get("/", result_fns.getAll);
   router.put("/", result_fns.addOrUpdate);
   router.get(
     "/:studentId&:minigameId&:difficulty&:level",

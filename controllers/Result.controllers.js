@@ -48,6 +48,16 @@ exports.studentResults = (req, res) => {
     });
 };
 
+exports.getAll = (req, res) => {
+  Result.findAll({})
+    .then((data) => res.send(data))
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving result", error: err.message });
+    });
+};
+
 exports.getOneResult = (req, res) => {
   if (
     !req.params.studentId ||

@@ -79,7 +79,7 @@ exports.findAll = (req, res) => {
     .then((data) => {
       if (data === null) {
         res.status(400).send({
-          message: "No students",
+          message: "Error. No students",
         });
       } else {
         res.send(data);
@@ -106,7 +106,7 @@ exports.authenticate = (req, res) => {
     .then((data) => {
       if (data === null) {
         res.status(400).send({
-          message: "Wrong username or password",
+          message: "Error. Wrong username or password",
           result: false,
         });
       } else {
