@@ -58,7 +58,7 @@ exports.createTeacher = async (req, res) => {
 
   Teacher.create(teacher)
     .then((data) => {
-      res.send(data);
+      res.send({ message: "Successful", data: data });
     })
     .catch((err) => {
       res.status(500).send({
@@ -72,10 +72,10 @@ exports.findAll = (req, res) => {
     .then((data) => {
       if (data === null) {
         res.status(400).send({
-          message: "No teachers",
+          message: "Error. No teachers",
         });
       } else {
-        res.send(data);
+        res.send({ message: "Successful", data: data });
       }
     })
     .catch((err) => {
@@ -98,7 +98,7 @@ exports.authenticate = (req, res) => {
     .then((data) => {
       if (data === null) {
         res.status(400).send({
-          message: "Wrong username or password",
+          message: "Error. Wrong username or password",
           result: false,
         });
       } else {
