@@ -19,21 +19,14 @@ function has_teacher(fk_teacher_key) {
 }
 
 exports.createStudent = async (req, res) => {
-  if (!req.body.username) {
+  if (
+    !req.body.username ||
+    !req.body.teacher_key ||
+    !req.body.password ||
+    !req.body.name
+  ) {
     res.status(400).send({
-      message: "Error. Username Empty",
-    });
-    return;
-  }
-  if (!req.body.password) {
-    res.status(400).send({
-      message: "Error. Password Empty",
-    });
-    return;
-  }
-  if (!req.body.teacher_key) {
-    res.status(400).send({
-      message: "Error. Teacher Key Empty",
+      message: "Error. Data Missing",
     });
     return;
   }
@@ -59,6 +52,7 @@ exports.createStudent = async (req, res) => {
   const student = {
     username: req.body.username,
     password: req.body.password,
+    name: req.body.name,
     fk_teacher_key: req.body.teacher_key,
   };
 

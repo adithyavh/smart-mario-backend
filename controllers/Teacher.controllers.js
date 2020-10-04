@@ -17,19 +17,14 @@ function isValidSchoolKey(school_key) {
 }
 
 exports.createTeacher = async (req, res) => {
-  if (!req.body.username) {
+  if (
+    !req.body.username ||
+    !req.body.school_key ||
+    !req.body.password ||
+    !req.body.name
+  ) {
     res.status(400).send({
-      message: "Error. Username Empty",
-    });
-    return;
-  } else if (!req.body.password) {
-    res.status(400).send({
-      message: "Error. Password Empty",
-    });
-    return;
-  } else if (!req.body.school_key) {
-    res.status(400).send({
-      message: "Error. School Key Empty",
+      message: "Error. Data Missing",
     });
     return;
   }
@@ -53,6 +48,7 @@ exports.createTeacher = async (req, res) => {
   const teacher = {
     username: req.body.username,
     password: req.body.password,
+    name: req.body.name,
     school_key: req.body.school_key,
   };
 
