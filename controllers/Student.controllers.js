@@ -1,5 +1,15 @@
+/**
+ * Student.controllers module.
+ * @module Student.controllers
+ */
+
 const { Student, Teacher, Op } = require("../models");
 
+/**
+ * Checks if student's username entered is unique in the database
+ *
+ * @param {string} username - Candidate username to be checked
+ */
 function isUniqueUsername(username) {
   return Student.count({ where: { username: username } }).then((count) => {
     if (count != 0) {
@@ -9,6 +19,11 @@ function isUniqueUsername(username) {
   });
 }
 
+/**
+ * Checks if given student has a valid teacher key that points to a teacher
+ *
+ * @param {string} fk_teacher_key - teacher key to be checked
+ */
 function has_teacher(fk_teacher_key) {
   return Teacher.count({ where: { id: fk_teacher_key } }).then((count) => {
     if (count != 0) {
@@ -18,6 +33,12 @@ function has_teacher(fk_teacher_key) {
   });
 }
 
+/**
+ * Creates a new student account
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.createStudent = async (req, res) => {
   if (
     !req.body.username ||
@@ -68,6 +89,12 @@ exports.createStudent = async (req, res) => {
     });
 };
 
+/**
+ * Retrieves all student account details. For testing only.
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.findAll = (req, res) => {
   Student.findAll({ include: Teacher })
     .then((data) => {
@@ -86,6 +113,12 @@ exports.findAll = (req, res) => {
     });
 };
 
+/**
+ * Validates whether given student details correspond to an entry in the database
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.authenticate = (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -117,11 +150,3 @@ exports.authenticate = (req, res) => {
       });
     });
 };
-
-exports.update = (req, res) => {};
-
-exports.delete = (req, res) => {};
-
-exports.deleteAll = (req, res) => {};
-
-exports.findAllPublished = (req, res) => {};

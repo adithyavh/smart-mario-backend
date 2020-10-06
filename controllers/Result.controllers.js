@@ -1,6 +1,17 @@
+/**
+ * Result.controllers module.
+ * @module Result.controllers
+ */
+
 const db = require("../models");
 const Result = db.Result;
 
+/**
+ * Updates a result if it already exists. If not, a new Result is created
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.addOrUpdate = (req, res) => {
   if (
     !req.body.studentId ||
@@ -42,6 +53,12 @@ exports.addOrUpdate = (req, res) => {
     });
 };
 
+/**
+ * Retreives all result posted in the server based on studentID
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.studentResults = (req, res) => {
   if (!req.params.studentId) {
     res.status(400).send({ message: "Error. studentId missing" });
@@ -57,6 +74,12 @@ exports.studentResults = (req, res) => {
     });
 };
 
+/**
+ * Retreives all results posted in the server. For testing purposes only.
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.getAll = (req, res) => {
   Result.findAll({})
     .then((data) => res.send(data))
@@ -67,6 +90,12 @@ exports.getAll = (req, res) => {
     });
 };
 
+/**
+ * Retreives one result posted in the server, based on studentID, minigame, difficulty and level.
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.getOneResult = (req, res) => {
   if (
     !req.params.studentId ||
@@ -76,7 +105,6 @@ exports.getOneResult = (req, res) => {
   ) {
     res.status(400).send({ message: "Error. Input incomplete" });
   }
-
   Result.findAll({
     where: {
       studentId: req.params.studentId,

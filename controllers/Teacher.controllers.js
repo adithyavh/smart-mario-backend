@@ -1,5 +1,15 @@
+/**
+ * Teacher.controllers module.
+ * @module Teacher.controllers
+ */
+
 const { Student, Teacher, Op } = require("../models");
 
+/**
+ * Checks if teacher's username entered is unique in the database
+ *
+ * @param {string} username - Candidate username to be checked
+ */
 function isUniqueUsername(username) {
   return Teacher.count({ where: { username: username } }).then((count) => {
     if (count != 0) {
@@ -9,6 +19,11 @@ function isUniqueUsername(username) {
   });
 }
 
+/**
+ * Checks if the given teacher has a valid school key
+ *
+ * @param {string} school_key - school key to be checked
+ */
 function isValidSchoolKey(school_key) {
   let valid_school_ids = ["1", "2"];
   let valid = valid_school_ids.includes(school_key);
@@ -16,6 +31,12 @@ function isValidSchoolKey(school_key) {
   return valid;
 }
 
+/**
+ * Creates a new teacher account
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.createTeacher = async (req, res) => {
   if (
     !req.body.username ||
@@ -63,6 +84,12 @@ exports.createTeacher = async (req, res) => {
     });
 };
 
+/**
+ * Retrieves all teacher account details. For testing only.
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.findAll = (req, res) => {
   Teacher.findAll()
     .then((data) => {
@@ -81,6 +108,12 @@ exports.findAll = (req, res) => {
     });
 };
 
+/**
+ * Validates whether given teacher's details correspond to an entry in the database
+ *
+ * @param {Obj} req - The request handler with a JSON body object with input variables
+ * @param {Obj} res - The response handler
+ */
 exports.authenticate = (req, res) => {
   const username = req.body.username;
   const password = req.body.password;

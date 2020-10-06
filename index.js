@@ -1,12 +1,13 @@
-// https://bezkoder.com/node-js-express-sequelize-mysql/
+/**
+ * Main file run on server startup.
+ * @module index.js
+ */
 
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-// Set Header Content-Type = application/json (no quotes)
+app.use(bodyParser.urlencoded({ extended: true })); // Set Header Content-Type = application/json (no quotes)
 
 const db = require("./models/index.js");
 db.sequelize.sync({ force: false }).then(() => {
@@ -16,7 +17,7 @@ db.sequelize.sync({ force: false }).then(() => {
 const loader = require("./models/dataLoader.js");
 loader(db);
 
-// Test call
+// Basic API call
 
 let count = 1;
 app.get("/", function (req, res) {
