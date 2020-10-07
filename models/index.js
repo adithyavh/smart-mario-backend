@@ -1,6 +1,17 @@
-const dbConfig = require("../config/db.config.js");
-const Sequelize = require("sequelize");
+/**
+ * @module models contains configuration for database and schema objects
+ *
+ */
 
+const Sequelize = require("sequelize");
+const dbConfig = require("../config/db.config.js");
+
+/**
+ * @typedef {Object} Sequelize
+ * @property {string} dialect type of SQL used
+ * @property {string} storage type of logging
+ * @property {Object} pool additional configuration for SQL database
+ */
 const sequelize = new Sequelize({
   dialect: dbConfig.dialect,
   storage: dbConfig.storage,
@@ -14,6 +25,15 @@ const sequelize = new Sequelize({
   },
 });
 
+/**
+ * @typedef {Object} db contains schemas of all entities and logic mapping entities to each other
+ * @requires ./Student.models Student schema
+ * @requires ./Teacher.models Teacher schema
+ * @requires ./World.models World schema
+ * @requires ./Minigame.models Minigame schema
+ * @requires ./Challenge.models Challenge schema
+ * @requires ./Result.models Result schema
+ */
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
