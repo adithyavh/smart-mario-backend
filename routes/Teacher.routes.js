@@ -1,3 +1,9 @@
+/**
+ *
+ * @module Teacher.routes handles routing for endpoints related to getting/setting Teacher data
+ * @requires ../controllers/Teacher.controllers
+ * @requires express
+ */
 module.exports = (app) => {
   const teacher_fns = require("../controllers/Teacher.controllers.js");
 

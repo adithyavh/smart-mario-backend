@@ -1,7 +1,13 @@
+/**
+ *
+ * @module Result.routes handles the routing for getting/setting data related to student results
+ * @requires ../controllers/Result.controllers
+ * @requires express
+ */
 module.exports = (app) => {
   const result_fns = require("../controllers/Result.controllers.js");
 
-  var router = require("express").Router();
+  const router = require("express").Router();
 
   router.get("/", result_fns.getAll);
   router.put("/", result_fns.addOrUpdate);

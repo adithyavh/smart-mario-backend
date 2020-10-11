@@ -1,3 +1,9 @@
+/**
+ *
+ * @module Student.routes handles routing for routes related to getting/setting student data
+ * @requires ../controllers/Student.controllers
+ * @requires express
+ */
 module.exports = (app) => {
   const student_fns = require("../controllers/Student.controllers.js");
 
