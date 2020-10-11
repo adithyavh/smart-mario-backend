@@ -1,32 +1,6 @@
 module.exports = (sequelize, Sequelize, db) => {
-  const Result = sequelize.define("result", {
-    score: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    questions_attempted: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    questions_correct: {
-      type: Sequelize.INTEGER,
-      allowNull: false,
-    },
-    difficulty: {
-      primaryKey: true,
-      type: Sequelize.STRING,
-      allowNull: false,
-      validate: {
-        isIn: [["easy", "medium", "hard"]],
-      },
-    },
-    level: {
-      primaryKey: true,
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
+  const Task = sequelize.define("task", {
     minigameId: {
-      primaryKey: true,
       type: Sequelize.INTEGER,
       references: {
         model: db.Minigame,
@@ -35,7 +9,6 @@ module.exports = (sequelize, Sequelize, db) => {
       allowNull: false,
     },
     studentId: {
-      primaryKey: true,
       type: Sequelize.INTEGER,
       references: {
         model: db.Student,
@@ -43,7 +16,33 @@ module.exports = (sequelize, Sequelize, db) => {
       },
       allowNull: false,
     },
+    teacherId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: db.Teacher,
+        key: "id",
+      },
+      allowNull: false,
+    },
+    difficulty: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        isIn: [["easy", "medium", "hard"]],
+      },
+    },
+    level: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    completed: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        isIn: [["yes", "no"]],
+      },
+    },
   });
 
-  return Result;
+  return Task;
 };

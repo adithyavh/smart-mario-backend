@@ -28,6 +28,7 @@ require("./routes/Student.routes")(app);
 require("./routes/Teacher.routes")(app);
 require("./routes/Question.routes")(app);
 require("./routes/Result.routes")(app);
+require("./routes/Task.routes")(app);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
