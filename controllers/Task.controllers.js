@@ -79,7 +79,7 @@ exports.getTeacherTasks = (req, res) => {
       ["difficulty", "ASC"],
       ["level", "ASC"],
     ],
-    include: Student,
+    include: [db.Student, db.Minigame],
   })
     .then((data) => {
       res.send(data);
@@ -100,7 +100,7 @@ exports.getStudentTasks = (req, res) => {
       studentId: studentId,
     },
     order: [["minigameId", "ASC"]],
-    include: Student,
+    include: [db.Student, db.Minigame],
   })
     .then((data) => {
       res.send(data);
