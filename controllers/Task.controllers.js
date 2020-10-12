@@ -67,6 +67,31 @@ exports.resetTask = (req, res) => {
     );
 };
 
+exports.getTeacherTasks = (req, res) => {
+  let teacherId = req.params.teacherId;
+
+  Task.findAll({
+    where: {
+      teacherId: teacherId,
+    },
+    order: [
+      ["minigameId", "ASC"],
+      ["difficulty", "ASC"],
+      ["level", "ASC"],
+    ],
+    include: Student,
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving tasks for students",
+        error: err.message,
+      });
+    });
+};
+
 exports.getStudentTasks = (req, res) => {
   let studentId = req.params.studentId;
 
@@ -75,7 +100,7 @@ exports.getStudentTasks = (req, res) => {
       studentId: studentId,
     },
     order: [["minigameId", "ASC"]],
-    // include: db.Student,
+    include: Student,
   })
     .then((data) => {
       res.send(data);

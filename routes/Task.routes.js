@@ -8,7 +8,8 @@ module.exports = (app) => {
   router.put("/reset/:taskid", task_fns.resetTask);
 
   router.get("/", task_fns.getAll);
-  router.get("/:studentId", task_fns.getStudentTasks);
+  router.get("/student/:studentId", task_fns.getStudentTasks);
+  router.get("/teacher/:teacherId", task_fns.getTeacherTasks);
 
   app.use("/api/tasks", router);
 };

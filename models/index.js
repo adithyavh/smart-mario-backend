@@ -63,13 +63,27 @@ db.Student.belongsToMany(db.Challenge, {
   through: "Student_Challenge",
   unique: true,
 });
+
 db.Challenge.belongsToMany(db.Student, {
   through: "Student_Challenge",
   unique: true,
 });
 
-// db.Task.belongsToMany(db.Student,{
-//   through.
-// })
+//------------------- //
+db.Task.belongsTo(db.Student, {
+  foreignKey: "studentId",
+  sourceKey: "id",
+});
+
+db.Task.belongsTo(db.Teacher, {
+  foreignKey: "teacherId",
+  sourceKey: "id",
+});
+
+db.Task.belongsTo(db.Minigame, {
+  foreignKey: "minigameId",
+  sourceKey: "id",
+});
+//------------------- //
 
 module.exports = db;
