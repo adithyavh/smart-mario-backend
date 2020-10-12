@@ -18,10 +18,17 @@ exports.addOrUpdate = (req, res) => {
     !req.body.minigameId ||
     !req.body.score ||
     !req.body.difficulty ||
-    !req.body.level ||
-    !req.body.questions_attempted ||
-    !req.body.questions_correct
+    !req.body.level 
   ) {
+    res.status(400).send({ message: "Error. Incomplete Data" });
+    return;
+  }
+
+  if (
+    (!req.body.questions_attempted ||
+    !req.body.questions_correct) && (!req.body.time_taken)
+  )
+  {
     res.status(400).send({ message: "Error. Incomplete Data" });
     return;
   }
@@ -34,6 +41,7 @@ exports.addOrUpdate = (req, res) => {
     score: req.body.score,
     questions_attempted: req.body.questions_attempted,
     questions_correct: req.body.questions_correct,
+    time_taken: req.body.time_taken
   };
 
   let valid_diff = ["easy", "medium", "hard"];

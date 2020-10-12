@@ -12,6 +12,10 @@ module.exports = (sequelize, Sequelize, db) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+    time_taken: {
+      type: Sequelize.FLOAT,
+      allowNull: true,
+    },
     difficulty: {
       primaryKey: true,
       type: Sequelize.STRING,
