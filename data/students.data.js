@@ -2,22 +2,25 @@ module.exports = [
   {
     id: "1",
     username: "1",
-    name: "Ong",
+    name: "S1",
     password: "1",
     fk_teacher_key: "1",
+    // custom: "1"
   },
   {
     id: "2",
     username: "s1",
-    name: "Jia",
+    name: "S2",
     password: "1",
     fk_teacher_key: "1",
+    // custom: "1"
   },
   {
     id: "3",
     username: "s2",
-    name: "Xiang",
+    name: "S3",
     password: "1",
     fk_teacher_key: "3",
+    // custom: "1"
   },
 ];

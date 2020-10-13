@@ -9,7 +9,7 @@ module.exports = (app) => {
 
   router.get("/", task_fns.getAll);
   router.get("/student/:studentId", task_fns.getStudentTasks);
-  router.get("/teacher/:teacherId", task_fns.getTeacherTasks);
+  router.get("/teacher/:teacherId&:minigameId&:difficulty&:level", task_fns.getTeacherTasks);
 
   app.use("/api/tasks", router);
 };

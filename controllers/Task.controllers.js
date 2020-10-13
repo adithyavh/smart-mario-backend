@@ -69,15 +69,19 @@ exports.resetTask = (req, res) => {
 
 exports.getTeacherTasks = (req, res) => {
   let teacherId = req.params.teacherId;
+  let minigameId = req.params.minigameId;
+  let difficulty = req.params.difficulty;
+  let level = req.params.level;
 
   Task.findAll({
     where: {
       teacherId: teacherId,
+      minigameId:minigameId,
+      difficulty:difficulty,
+      level:level
     },
     order: [
-      ["minigameId", "ASC"],
-      ["difficulty", "ASC"],
-      ["level", "ASC"],
+      ["studentId", "ASC"],
     ],
     include: [db.Student, db.Minigame],
   })
