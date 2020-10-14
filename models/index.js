@@ -50,14 +50,23 @@ db.Task = require("./Task.models")(sequelize, Sequelize, db);
 // Adds fk_companyname to User
 
 db.Student.belongsTo(db.Teacher, {
-  foreignKey: "fk_teacher_key",
+  foreignKey: "teacherId",
   sourceKey: "id",
 });
 
+db.Teacher.hasMany(db.Student)
+
+//------------------- //
+
+db.Student.hasMany(db.Result)
+
+//------------------- //
 db.Minigame.belongsTo(db.World, {
-  foreignKey: "fk_world_id",
+  foreignKey: "world_id",
   sourceKey: "id",
 });
+
+//------------------- //
 
 db.Student.belongsToMany(db.Challenge, {
   through: "Student_Challenge",

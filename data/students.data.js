@@ -4,7 +4,7 @@ module.exports = [
     username: "1",
     name: "S1",
     password: "1",
-    fk_teacher_key: "1",
+    teacherId: "1",
     // custom: "1"
   },
   {
@@ -12,7 +12,7 @@ module.exports = [
     username: "s1",
     name: "S2",
     password: "1",
-    fk_teacher_key: "1",
+    teacherId: "1",
     // custom: "1"
   },
   {
@@ -20,7 +20,7 @@ module.exports = [
     username: "s2",
     name: "S3",
     password: "1",
-    fk_teacher_key: "3",
+    teacherId: "3",
     // custom: "1"
   },
 ];

@@ -19,7 +19,7 @@ exports.createTask = (req, res) => {
     teacherId: req.body.teacherId,
     difficulty: req.body.difficulty,
     level: req.body.level,
-    completed: "no",
+    completed: "Incomplete",
   };
 
   Task.create(task)
@@ -46,7 +46,7 @@ exports.getAll = (req, res) => {
 exports.completeTask = (req, res) => {
   let taskid = req.params.taskid;
 
-  Task.update({ completed: "yes" }, { where: { id: taskid } })
+  Task.update({ completed: "Completed" }, { where: { id: taskid } })
     .then((data) => res.send("Task " + taskid + " marked as complete"))
     .catch((err) =>
       res
@@ -58,7 +58,7 @@ exports.completeTask = (req, res) => {
 exports.resetTask = (req, res) => {
   let taskid = req.params.taskid;
 
-  Task.update({ completed: "no" }, { where: { id: taskid } })
+  Task.update({ completed: "Incomplete" }, { where: { id: taskid } })
     .then((data) => res.send("Task " + taskid + " marked as incomplete"))
     .catch((err) =>
       res

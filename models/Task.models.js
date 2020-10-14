@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize, db) => {
       type: Sequelize.STRING,
       allowNull: false,
       validate: {
-        isIn: [["yes", "no"]],
+        isIn: [["Completed", "Incomplete"]],
       },
     },
   });

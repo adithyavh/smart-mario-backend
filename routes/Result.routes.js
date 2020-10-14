@@ -16,6 +16,7 @@ module.exports = (app) => {
     result_fns.getOneResult,
   );
   router.get("/student/:studentId", result_fns.studentResults);
+  router.get("/teacher/:teacherId", result_fns.teacherResults);
 
   app.use("/api/results", router);
 };

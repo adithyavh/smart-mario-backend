@@ -5,6 +5,7 @@
 
 const db = require("../models");
 const Result = db.Result;
+const Teacher = db.Teacher;
 
 /**
  * Updates a result if it already exists. If not, a new Result is created
@@ -80,6 +81,28 @@ exports.studentResults = (req, res) => {
         .status(500)
         .send({ message: "Error retrieving result", error: err.message });
     });
+};
+
+exports.teacherResults = async (req, res) => {
+  if (!req.params.teacherId) {
+    res.status(400).send({ message: "Error. teacherId missing" });
+  }
+
+  let teacherId = req.params.teacherId;
+
+  let data = await Teacher.findByPk(teacherId, { 
+    include: {model: db.Student, include : [db.Result]}})
+
+  if (!data) 
+  {
+    res
+      .status(500)
+      .send({ message: "Error retrieving result", error: err.message })
+  }
+  else
+  {
+    res.send(data["students"])
+  }
 };
 
 /**
