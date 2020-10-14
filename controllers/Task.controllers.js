@@ -69,6 +69,29 @@ exports.resetTask = (req, res) => {
 
 exports.getTeacherTasks = (req, res) => {
   let teacherId = req.params.teacherId;
+
+  Task.findAll({
+    where: {
+      teacherId: teacherId,
+    },
+    order: [
+      ["studentId", "ASC"],
+    ],
+    include: [db.Student, db.Minigame],
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Error retrieving tasks for students",
+        error: err.message,
+      });
+    });
+};
+
+exports.getTeacherTasksPerLevel = (req, res) => {
+  let teacherId = req.params.teacherId;
   let minigameId = req.params.minigameId;
   let difficulty = req.params.difficulty;
   let level = req.params.level;
