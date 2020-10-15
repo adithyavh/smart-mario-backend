@@ -11,7 +11,7 @@ const { Student, Teacher, Op } = require("../models");
  * @param {string} username - Candidate username to be checked
  */
 function isUniqueUsername(username) {
-  return Student.count({ where: { username: username } }).then((count) => {
+  return Student.count({ where: { username } }).then((count) => {
     if (count != 0) {
       return false;
     }
@@ -74,7 +74,8 @@ exports.createStudent = async (req, res) => {
     username: req.body.username,
     password: req.body.password,
     name: req.body.name,
-    fk_teacher_key: req.body.teacher_key,
+    teacherId: req.body.teacher_key,
+    custom : "1"
   };
 
   // Add student object to Student table
@@ -88,6 +89,32 @@ exports.createStudent = async (req, res) => {
       });
     });
 };
+
+exports.getOneStudent = (req, res) => {
+  let studentId = req.params.studentId;
+
+  Student.findByPk(studentId)
+    .then((data) => res.send(data))
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving student", error: err.message });
+    });
+}
+
+exports.changeCustom = (req, res) => {
+
+  let studentId = req.params.studentId;
+  let custom = req.params.custom;
+
+  Student.update({ custom: custom }, {where: {id: studentId}})
+    .then(() => res.send("Success"))
+    .catch((err) => {
+      res
+        .status(500)
+        .send({ message: "Error changing custom", error: err.message });
+    });
+}
 
 /**
  * Retrieves all student account details. For testing only.

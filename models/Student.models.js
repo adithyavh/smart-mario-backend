@@ -13,10 +13,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    // custom : {
-    //   type: Sequelize.STRING,
-    //   allowNull: false,
-    // }
+    custom : {
+      type: Sequelize.STRING,
+      allowNull: false,
+    }
   });
 
   return Student;

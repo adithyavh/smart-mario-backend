@@ -5,7 +5,7 @@ module.exports = [
     name: "S1",
     password: "1",
     teacherId: "1",
-    // custom: "1"
+    custom: "1"
   },
   {
     id: "2",
@@ -13,7 +13,7 @@ module.exports = [
     name: "S2",
     password: "1",
     teacherId: "1",
-    // custom: "1"
+    custom: "1"
   },
   {
     id: "3",
@@ -21,6 +21,6 @@ module.exports = [
     name: "S3",
     password: "1",
     teacherId: "3",
-    // custom: "1"
+    custom: "1"
   },
 ];

@@ -10,6 +10,9 @@ module.exports = (app) => {
   const router = require("express").Router();
 
   router.get("/", student_fns.findAll);
+  router.get("/:studentId", student_fns.getOneStudent);
+
+  router.put("/:studentId&:custom", student_fns.changeCustom)
   router.post("/", student_fns.createStudent);
   router.post("/authenticate", student_fns.authenticate);
 
