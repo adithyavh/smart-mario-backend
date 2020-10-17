@@ -108,11 +108,17 @@ exports.changeCustom = (req, res) => {
   let custom = req.params.custom;
 
   Student.update({ custom: custom }, {where: {id: studentId}})
-    .then(() => res.send("Success"))
+    .then((data) => {
+
+      if (data[0] ===0) // number of rows affected
+        res.status(500).send({"success": false, message: "Error changing custom"})
+      else
+        res.send ({success: true})
+    })
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error changing custom", error: err.message });
+        .send({"success": false, message: "Error changing custom", error: err.message });
     });
 }
 

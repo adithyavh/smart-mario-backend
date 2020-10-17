@@ -12,8 +12,8 @@ module.exports = (app) => {
   router.get("/", student_fns.findAll);
   router.get("/:studentId", student_fns.getOneStudent);
 
-  router.put("/:studentId&:custom", student_fns.changeCustom)
   router.post("/", student_fns.createStudent);
+  router.put("/:studentId&:custom", student_fns.changeCustom)
   router.post("/authenticate", student_fns.authenticate);
 
   app.use("/api/students", router);
