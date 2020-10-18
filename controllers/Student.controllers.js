@@ -107,9 +107,6 @@ exports.changeCustom = (req, res) => {
   let studentId = req.params.studentId;
   let custom = req.params.custom;
 
-  // let studentId = req.body.studentId;
-  // let custom = req.body.custom;
-
   Student.update({ custom: custom }, {where: {id: studentId}})
     .then((data) => {
 

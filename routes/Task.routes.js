@@ -3,7 +3,7 @@ module.exports = (app) => {
 
   const router = require("express").Router();
 
-  router.put("/", task_fns.createTask);
+  router.put("/:teacherId&:minigameId&:difficulty&:level", task_fns.createTask);
   router.put("/complete/:taskid", task_fns.completeTask);
   router.put("/reset/:taskid", task_fns.resetTask);
 

@@ -2,34 +2,74 @@ const db = require("../models");
 const Task = db.Task;
 const Student = db.Student;
 
-exports.createTask = (req, res) => {
+async function getStudents (teacherId)
+{
+  let data =  await Student.findAll({where: {teacherId}, raw : true})
+  return data
+}
+
+function taskExists(minigameId,teacherId,difficulty,level) {
+  return Task.count({ where: { minigameId,teacherId,difficulty,level } }).then((count) => {
+    console.log(count)
+    if (count !== 0) {
+      return true;
+    }
+    return false;
+  });
+}
+
+exports.createTask = async (req, res) => {
   if (
-    !req.body.minigameId ||
-    !req.body.studentId ||
-    !req.body.teacherId ||
-    !req.body.difficulty ||
-    !req.body.level
+    !req.params.minigameId ||
+    !req.params.teacherId ||
+    !req.params.difficulty ||
+    !req.params.level
   ) {
-    res.status(400).send({ message: "Error. Incomplete Data" });
+    res.status(400).send({ success: false, message: "Error. Incomplete Data" });
     return;
   }
-  const task = {
-    minigameId: req.body.minigameId,
-    studentId: req.body.studentId,
-    teacherId: req.body.teacherId,
-    difficulty: req.body.difficulty,
-    level: req.body.level,
-    completed: "Incomplete",
-  };
 
-  Task.create(task)
+  if (await taskExists(req.params.minigameId,
+    req.params.teacherId,
+    req.params.difficulty,req.params.level))
+  {
+    res.status(500).send({success: false,  message: "Error. Task Exists" });
+    return;
+  }
+
+  let studentsList = await getStudents (req.params.teacherId);
+  let tasksList = []
+  
+  if (studentsList.length === 0)
+  {
+    res.status(500).send({success: false,  message: "Error. No students" });
+    return;
+  }
+
+  for (let student of studentsList)
+  {
+    let task = {
+      minigameId: req.params.minigameId,
+      studentId: student["id"],
+      teacherId: req.params.teacherId,
+      difficulty: req.params.difficulty,
+      level: req.params.level,
+      completed: "Incomplete",
+    };
+
+    tasksList.push(task)
+  }
+
+  // console.log(tasksList)
+
+  db.Task.bulkCreate(tasksList, {
+    ignoreDuplicates: true,
+  })
     .then((data) => {
-      res.send({ message: "Successful", data: data });
+      res.send({success: true, message : "Tasks Created", data: data});
     })
     .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Error creating task",
-      });
+      res.status(500).send({success: false, message : err.message || "Faliure to add create tasks"} );
     });
 };
 

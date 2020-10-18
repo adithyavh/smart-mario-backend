@@ -13,7 +13,6 @@ module.exports = (app) => {
   router.get("/:studentId", student_fns.getOneStudent);
 
   router.post("/", student_fns.createStudent);
-  // router.post("/:studentId&:custom", student_fns.changeCustom)
   router.put("/:studentId&:custom", student_fns.changeCustom)
   router.post("/authenticate", student_fns.authenticate);
 
