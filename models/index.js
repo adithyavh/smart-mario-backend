@@ -94,5 +94,15 @@ db.Task.belongsTo(db.Minigame, {
   sourceKey: "id",
 });
 //------------------- //
+db.Result.belongsTo(db.Student, {
+  foreignKey: "studentId",
+  sourceKey: "id",
+});
+
+db.Result.belongsTo(db.Minigame, {
+  foreignKey: "minigameId",
+  sourceKey: "id",
+});
+//------------------- //
 
 module.exports = db;

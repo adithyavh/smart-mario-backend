@@ -7,13 +7,29 @@ const db = require("../models");
 const Result = db.Result;
 const Teacher = db.Teacher;
 
+exports.getLeaderBoard = (req, res) => {
+  Result.findAll({
+    attributes: [[db.sequelize.fn('sum', db.sequelize.col('score')), 'total_score']],
+    include : [db.Student],
+    group : ['studentId'],
+    raw: true,
+    order: db.sequelize.literal('total_score DESC')
+  })
+  .then((data) => {
+    res.send({success: true, data})
+  })
+  .catch((err) => {
+    res.status(500).send({success: false, error: err.message})
+  });
+}
+
 /**
  * Updates a result if it already exists. If not, a new Result is created
  *
  * @param {Obj} req - The request handler with a JSON body object with input variables
  * @param {Obj} res - The response handler
  */
-exports.addOrUpdate = (req, res) => {
+exports.addOrUpdate = async (req, res) => {
   if (
     !req.body.studentId ||
     !req.body.minigameId ||
@@ -21,7 +37,7 @@ exports.addOrUpdate = (req, res) => {
     !req.body.difficulty ||
     !req.body.level 
   ) {
-    res.status(400).send({ message: "Error. Incomplete Data" });
+    res.status(400).send({success: false, message: "Error. Incomplete Data" });
     return;
   }
 
@@ -30,7 +46,7 @@ exports.addOrUpdate = (req, res) => {
     !req.body.questions_correct) && (!req.body.time_taken)
   )
   {
-    res.status(400).send({ message: "Error. Incomplete Data" });
+    res.status(400).send({success: false, message: "Error. Incomplete Data" });
     return;
   }
 
@@ -49,16 +65,31 @@ exports.addOrUpdate = (req, res) => {
   if (!valid_diff.includes(result.difficulty)) {
     res
       .status(400)
-      .send({ message: "Error. Difficulty must be easy, medium or hard" });
+      .send({success: false, message: "Error. Difficulty must be easy, medium or hard" });
     return;
+  }
+
+  prev_result = await Result.findOne({
+    where : {
+        "studentId": req.body.studentId,
+        "minigameId": req.body.minigameId,
+        "difficulty": req.body.difficulty,
+        "level": req.body.level,
+    },
+    raw : true})
+
+  if (prev_result && prev_result["score"]>req.body.score)
+  {
+    res.send({success: true, message: "New score is lower. No update necessary"})
+    return
   }
 
   Result.upsert(result)
     .then((data) => {
-      res.send(data[0]); // SQLite will return [data, null]
+      res.send({success: true, data: data[0]}); // SQLite will return [data, null]
     })
     .catch((err) => {
-      res.status(500).send({ message: "Error adding result", error: err });
+      res.status(500).send({ success: false, message: "Error adding result", error: err });
     });
 };
 
@@ -70,7 +101,7 @@ exports.addOrUpdate = (req, res) => {
  */
 exports.studentResults = (req, res) => {
   if (!req.params.studentId) {
-    res.status(400).send({ message: "Error. studentId missing" });
+    res.status(400).send({ success: false, message: "Error. studentId missing" });
   }
 
   let studentId = req.params.studentId;
@@ -79,13 +110,15 @@ exports.studentResults = (req, res) => {
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error retrieving result", error: err.message });
+        .send({ success: false, message: "Error retrieving result", error: err.message });
+        return
     });
 };
 
 exports.teacherResults = async (req, res) => {
   if (!req.params.teacherId) {
-    res.status(400).send({ message: "Error. teacherId missing" });
+    res.status(400).send({ success: false, message: "Error. teacherId missing" });
+    return
   }
 
   let teacherId = req.params.teacherId;
@@ -97,11 +130,11 @@ exports.teacherResults = async (req, res) => {
   {
     res
       .status(500)
-      .send({ message: "Error retrieving result", error: err.message })
+      .send({success: false, message: "Error retrieving result", error: err.message })
   }
   else
   {
-    res.send(data["students"])
+    res.send({success: true, data: data["students"]})
   }
 };
 
@@ -113,11 +146,11 @@ exports.teacherResults = async (req, res) => {
  */
 exports.getAll = (req, res) => {
   Result.findAll({})
-    .then((data) => res.send(data))
+    .then((data) => res.send({success: true, data}))
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error retrieving result", error: err.message });
+        .send({success: false, message: "Error retrieving result", error: err.message });
     });
 };
 
@@ -134,7 +167,7 @@ exports.getOneResult = (req, res) => {
     !req.params.difficulty ||
     !req.params.level
   ) {
-    res.status(400).send({ message: "Error. Input incomplete" });
+    res.status(400).send({success: false, message: "Error. Input incomplete" });
   }
   Result.findAll({
     where: {
@@ -144,10 +177,10 @@ exports.getOneResult = (req, res) => {
       level: req.params.level,
     },
   })
-    .then((data) => res.send(data))
+    .then((data) => res.send({success: true, data}))
     .catch((err) => {
       res
         .status(500)
-        .send({ message: "Error retrieving result", error: err.message });
+        .send({ success: false, message: "Error retrieving result", error: err.message });
     });
 };

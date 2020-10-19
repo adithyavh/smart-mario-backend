@@ -17,6 +17,7 @@ module.exports = (app) => {
   );
   router.get("/student/:studentId", result_fns.studentResults);
   router.get("/teacher/:teacherId", result_fns.teacherResults);
+  router.get("/leaderboard", result_fns.getLeaderBoard);
 
   app.use("/api/results", router);
 };
