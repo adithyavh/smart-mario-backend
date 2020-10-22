@@ -1,41 +1,47 @@
-﻿ID,Question,Answer
-1,The feature by which one object can interact with another object,Message Passing
-3,Class is _________ abstraction.,Logical
-4,Object is ________ abstraction.,Real
-5,Abstraction gives higher degree of ________,Idealized interface
-6,Abstraction can apply to ____________,Control and data
-7,Class is pass by _______,Reference
-8,Base class,It is parent of any of its derived class
-9,Derived class,A class which inherits one or more classes
-10,Abstract class,This class type has at least one pure virtual function
-11,Definition of a class,Blueprint of an object
-12,Definition of an object,Instance of a class
-13,Polymorphism,The ability for a message/data to be processed in more than one form
-14,Encapsulation,A way of combining various data members and member functions that operate on those data members into a single unit
-15,Abstraction,Hiding the implementation and showing only the features
-16,Constructor overloading,Defining more than one constructor in single class with different signature
-17,Protected access specifier,"Members are secure as private, but can be inherited"
-18,Inheritance,Using the data and functions into derived segment
-19,Single level inheritance,A class inheriting a base class
-20,Multiple inheritance,When a class is derived from two or more classes
-21,Hierarchical inheritance,More than one classes being derived from one class
-22,Hybrid inheritance,Combination of two or more inheritance types
-23,An array of objects,An array of instances of class represented by single name
-24,Exception,Problem arising during runtime
-25,ClassNotFoundException,Handling of undefined class
-26,NullPointerException,Exception thrown when operation is done on a variable with null value
-27,ArithmeticException,Exception thrown when dividing a number by zero
-28,ArrayIndexOutOfBoundsException,Exception thrown when inserting any value in the wrong index
-29,Destructor,A method which is automatically called when the object is made of scope or destroyed
-30,Ternary operator,An operator which takes three arguments
-31,Call by Value,"Value passed will get modified only inside the function, and it returns the same value whatever it is passed into the function."
-32,Call by Reference,Value passed will get modified in both inside and outside the functions and it returns the same or different value.
-33,Super,This keyword allows to access overridden methods and also to access hidden members of the superclass.
-34,This,This keyword is used as a pointer which differentiates between the current object with the global object. It refers to the current object.
-35,Operator,This keyword can be used for overloading
-36,Early Binding,Assignment of values to variables during compile time
-37,Late Binding,Assignment of values to variables during run time
-38,Static Binding,"A binding in which name can be associated with the class during compilation time, and it is also called as early Binding."
-39,Dynamic Binding,"A binding in which name can be associated with the class during execution time, and it is also called as Late Binding."
-40,Upcasting,Casting subtype to supertype
-41,Downcasting,Casting supertype to subtype
+﻿ID,Difficulty,Question,Answer
+1,1,Class is pass by _______,Reference
+2,1,More than one classes being derived from one class,Hierarchical inheritance
+3,1,Exception thrown when inserting any value in the wrong index,ArrayIndexOutOfBoundsException
+4,1,Assignment of values to variables during run time,Late Binding
+5,1,Combination of two or more inheritance types,Hybrid inheritance
+6,1,Exception thrown when operation is done on a variable with null value,NullPointerException
+7,1,A method which is automatically called when the object is made of scope or destroyed,Destructor
+8,1,"A binding in which name can be associated with the class during compilation time, and it is also called as early Binding.",Static Binding
+9,1,"A binding in which name can be associated with the class during execution time, and it is also called as Late Binding.",Dynamic Binding
+10,1,This class type has at least one pure virtual function,Abstract class
+11,1,Blueprint of an object,Definition of a class
+12,1,A class inheriting a base class,Single level inheritance
+13,1,When a class is derived from two or more classes,Multiple inheritance
+14,1,An array of instances of class represented by single name,An array of objects
+15,1,An operator which takes three arguments,Ternary operator
+16,1,This should be used for safe downcast,Dynamic cast
+17,2,A class which inherits one or more classes,Derived class
+18,2,Instance of a class,Definition of an object
+19,2,Problem arising during runtime,Exception
+20,2,This keyword allows to access overridden methods and also to access hidden members of the superclass.,Super
+21,2,Casting supertype to subtype,Downcasting
+22,2,The feature by which one object can interact with another object,Message Passing
+23,2,Class is _________ abstraction.,Logical
+24,2,It is parent of any of its derived class,Base class
+25,2,Exception thrown when dividing a number by zero,ArithmeticException
+26,2,This keyword can be used for overloading,Operator
+27,2,Assignment of values to variables during compile time,Early Binding
+28,2,Access modifier used such that any non-subclass class outside the package may access it,Public
+29,2,"Access modifier used such that only a subclass outside the same package, and any classes in the same package may access it",Protected
+30,2,Access modifier used such that only classes in the same package may access it,No modifier
+31,2,Access modifier used such that only the same class may access it,Private
+32,3,Object is ________ abstraction.,Real
+33,3,A way of combining various data members and member functions that operate on those data members into a single unit,Encapsulation
+34,3,Defining more than one constructor in single class with different signature,Constructor overloading
+35,3,"Members are secure as private, but can be inherited",Protected access specifier
+36,3,"Value passed will get modified only inside the function, and it returns the same value whatever it is passed into the function.",Call by Value
+37,3,Abstraction can apply to ____________,Control and data
+38,3,Using the data and functions into derived segment,Inheritance
+39,3,Keyword used as a pointer which differentiates between the current object with the global object. It refers to the current object.,This
+40,3,Casting subtype to supertype,Upcasting
+41,3,Abstraction gives higher degree of ________,Idealized interface
+42,3,The ability for a message/data to be processed in more than one form,Polymorphism
+43,3,Hiding the implementation and showing only the features,Abstraction
+44,3,Handling of undefined class,ClassNotFoundException
+45,3,Value passed will get modified in both inside and outside the functions and it returns the same or different value.,Call by Reference
+46,3,The value returned when dynamic cast fails,null pointer
