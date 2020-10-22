@@ -124,7 +124,9 @@ exports.teacherResults = async (req, res) => {
   let teacherId = req.params.teacherId;
 
   let data = await Teacher.findByPk(teacherId, { 
-    include: {model: db.Student, include : [db.Result]}})
+    include: [{model: db.Student, 
+      include : [{model: db.Result, include : [db.Minigame]}]
+    }]})
 
   if (!data) 
   {
