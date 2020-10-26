@@ -75,7 +75,7 @@ exports.createStudent = async (req, res) => {
     password: req.body.password,
     name: req.body.name,
     teacherId: req.body.teacher_key,
-    custom : "1"
+    custom : "0"
   };
 
   // Add student object to Student table
