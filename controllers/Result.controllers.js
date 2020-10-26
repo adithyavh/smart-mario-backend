@@ -23,6 +23,36 @@ exports.getLeaderBoard = (req, res) => {
   });
 }
 
+exports.getLeaderBoardRank = async (req, res) => {
+
+  if (!req.params.studentId)
+  {
+    res.status(500).send({success: false, message: "No student ID"})
+    return
+  }
+  studentId = req.params.studentId
+
+  results = await Result.findAll({
+    attributes: [[db.sequelize.fn('sum', db.sequelize.col('score')), 'total_score']],
+    include : [db.Student],
+    group : ['studentId'],
+    raw: true,
+    order: db.sequelize.literal('total_score DESC')
+  })
+
+  rank = 1
+  for (let result of results)
+  {
+    if (result["student.id"]==studentId)
+    {
+      res.send({success: true, rank})
+      return
+    }
+    rank++
+  }
+  res.status(500).send({success: false, message: "Student not on leaderboard"})
+}
+
 /**
  * Updates a result if it already exists. If not, a new Result is created
  *

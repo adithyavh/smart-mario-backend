@@ -18,6 +18,6 @@ module.exports = (app) => {
   router.get("/student/:studentId", result_fns.studentResults);
   router.get("/teacher/:teacherId", result_fns.teacherResults);
   router.get("/leaderboard", result_fns.getLeaderBoard);
-
+  router.get("/leaderboard/:studentId", result_fns.getLeaderBoardRank);
   app.use("/api/results", router);
 };
