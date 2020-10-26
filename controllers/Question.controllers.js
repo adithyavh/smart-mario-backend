@@ -14,7 +14,7 @@ exports.getRandomMCQTheory = async (req, res) => {
   // let index = Math.floor(Math.random() * numMCQTheory) + 1;
   const jsonArray = await csv().fromFile("data/MCQ_Theory.csv");
   // res.send({ message: "successful", allQuestions: jsonArray.slice(0, 20) });
-  res.send({ message: "successful", allQuestions: jsonArray });
+  res.send({ message: "successful", Question: jsonArray });
 };
 
 /**
