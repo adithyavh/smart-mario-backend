@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "doc": "jsdoc -r models"
+    "doc": "jsdoc -r ./models ./controllers ./data ./routes index.js"
   },
   "author": "adithya-vh",
   "license": "ISC",
@@ -17,7 +17,8 @@
     "express": "^4.17.1",
     "mysql2": "^2.2.1",
     "sequelize": "^6.3.5",
-    "sqlite3": "^5.0.0"
+    "sqlite3": "^5.0.0",
+    "string": "^3.3.3"
   },
   "devDependencies": {
     "eslint": "^7.9.0",

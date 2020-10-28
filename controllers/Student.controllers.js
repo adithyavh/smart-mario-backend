@@ -4,6 +4,7 @@
  */
 
 const { Student, Teacher, Op } = require("../models");
+const S = require("string")
 
 /**
  * Checks if student's username entered is unique in the database
@@ -17,6 +18,37 @@ function isUniqueUsername(username) {
     }
     return true;
   });
+}
+
+const isValidPassword = (string) => {
+
+  let number = false
+  let upper = false
+  let lower = false
+
+  for (let i = 0 ; i<string.length; i++)
+  {
+    // console.log(string.charAt(i))
+    let ch = S(string.charAt(i))
+
+    if (ch.isAlpha())
+    {
+      if (ch.isLower())
+      {
+        lower = true
+      }
+      else
+      {
+        upper = true
+      }
+    }
+    else if (ch.isNumeric)
+    {
+      number = true
+    }
+  }
+
+  return (number && upper && lower)
 }
 
 /**
@@ -65,6 +97,14 @@ exports.createStudent = async (req, res) => {
   if (!hasTeacher) {
     res.status(400).send({
       message: "Error. Invalid Teacher Key",
+    });
+    return;
+  }
+
+  if (!isValidPassword(req.body.password))
+  {
+    res.status(400).send({
+      message: "Error. Weak Password",
     });
     return;
   }

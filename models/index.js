@@ -25,6 +25,18 @@ const sequelize = new Sequelize({
   },
 });
 
+// const sequelize = new Sequelize(dbConfig.db, dbConfig.user, dbConfig.password, {
+//   host: dbConfig.host,
+//   dialect: dbConfig.dialect,
+
+//   pool: {
+//     max: dbConfig.pool.max,
+//     min: dbConfig.pool.min,
+//     acquire: dbConfig.pool.acquire,
+//     idle: dbConfig.pool.idle,
+//   },
+// });
+
 /**
  * @typedef {Object} db contains schemas of all entities and logic mapping entities to each other
  * @requires ./Student.models Student schema
@@ -42,7 +54,6 @@ db.Student = require("./Student.models.js")(sequelize, Sequelize);
 db.Teacher = require("./Teacher.models.js")(sequelize, Sequelize);
 db.World = require("./World.models.js")(sequelize, Sequelize);
 db.Minigame = require("./Minigame.models.js")(sequelize, Sequelize);
-db.Challenge = require("./Challenge.models.js")(sequelize, Sequelize);
 db.Result = require("./Result.models")(sequelize, Sequelize, db);
 db.Task = require("./Task.models")(sequelize, Sequelize, db);
 
@@ -68,15 +79,15 @@ db.Minigame.belongsTo(db.World, {
 
 //------------------- //
 
-db.Student.belongsToMany(db.Challenge, {
-  through: "Student_Challenge",
-  unique: true,
-});
+// db.Student.belongsToMany(db.Challenge, {
+//   through: "Student_Challenge",
+//   unique: true,
+// });
 
-db.Challenge.belongsToMany(db.Student, {
-  through: "Student_Challenge",
-  unique: true,
-});
+// db.Challenge.belongsToMany(db.Student, {
+//   through: "Student_Challenge",
+//   unique: true,
+// });
 
 //------------------- //
 db.Task.belongsTo(db.Student, {

@@ -1,5 +1,5 @@
 /**
- *
+ * 
  * @module Result.routes handles the routing for getting/setting data related to student results
  * @requires ../controllers/Result.controllers
  * @requires express
