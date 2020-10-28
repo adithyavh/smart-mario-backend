@@ -104,7 +104,7 @@ exports.createStudent = async (req, res) => {
   if (!isValidPassword(req.body.password))
   {
     res.status(400).send({
-      message: "Error. Weak Password",
+      message: "Error. Weak Password. Password must contain at least 1 uppercase, 1 lowercase and 1 number.",
     });
     return;
   }
