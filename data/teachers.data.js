@@ -1,23 +1,23 @@
 module.exports = [
   {
     id: "1",
-    username: "1",
-    name: "Wu",
-    password: "1",
+    username: "kane",
+    name: "Kane",
+    password: "Kane1",
     school_key: "1",
   },
   {
     id: "2",
-    username: "kane",
-    name: "Bo",
-    password: "abcde",
+    username: "emily",
+    name: "Emily",
+    password: "Emily1",
     school_key: "2",
   },
   {
     id: "3",
-    username: "limmy",
-    name: "Dong",
-    password: "12345",
+    username: "test",
+    name: "test",
+    password: "test",
     school_key: "2",
   },
 ];
